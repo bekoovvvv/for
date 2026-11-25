@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Осенний скейтборд на CSS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 80% 22%, #ffe082 0 32px, rgba(255, 224, 130, 0.2) 33px 50px, transparent 51px),
+        repeating-linear-gradient(90deg, #cfd8dc 0 40px, transparent 40px 80px) 0 calc(100% - 48px) / 100% 6px no-repeat,
+        linear-gradient(#37474f, #263238) 0 100% / 100% 100px no-repeat,
+        linear-gradient(#d84315, #bf360c) 0 calc(100% - 100px) / 100% 35px no-repeat,
+        linear-gradient(to bottom, #90a4ae, #cfd8dc 70%, #eceff1);
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% calc(100% - 110px), #ff8f00 0 6px, transparent 7px),
+        radial-gradient(circle at 28% calc(100% - 105px), #fbc02d 0 7px, transparent 8px),
+        radial-gradient(circle at 52% calc(100% - 115px), #e65100 0 6px, transparent 7px),
+        radial-gradient(circle at 74% calc(100% - 108px), #ffb300 0 8px, transparent 9px),
+        radial-gradient(circle at 25% 18%, rgba(255,255,255,0.6) 0 35px, transparent 36px),
+        radial-gradient(circle at 30% 16%, rgba(255,255,255,0.6) 0 45px, transparent 46px),
+        radial-gradient(circle at 36% 19%, rgba(255,255,255,0.6) 0 30px, transparent 31px);
+    }
+
+    /* Скейтборд едет слева направо */
+    .skate {
+      position: absolute;
+      bottom: 85px;
+      width: 170px;
+      height: 44px;
+      animation: drive 4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+    }
+
+    .skate > div {
+      position: absolute;
+    }
+
+    /* Тень */
+    .shadow {
+      left: 14px;
+      bottom: -5px;
+      width: 142px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.45);
+      filter: blur(3px);
+    }
+
+    /* Дека с загнутыми носом и хвостом */
+    .deck {
+      left: 22px;
+      bottom: 20px;
+      width: 126px;
+      height: 10px;
+      background:
+        linear-gradient(#212121, #212121) 0 0 / 100% 3px no-repeat,
+        repeating-linear-gradient(90deg, #ffb300 0 14px, #e65100 14px 28px);
+      border-radius: 3px;
+    }
+    .deck::before,
+    .deck::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      width: 24px;
+      height: 10px;
+      background:
+        linear-gradient(#212121, #212121) 0 0 / 100% 3px no-repeat,
+        linear-gradient(90deg, #e65100, #ffb300);
+    }
+    .deck::before {
+      left: -18px;
+      border-radius: 8px 0 0 3px;
+      transform: rotate(-22deg);
+      transform-origin: right center;
+    }
+    .deck::after {
+      right: -18px;
+      border-radius: 0 8px 3px 0;
+      transform: rotate(22deg);
+      transform-origin: left center;
+    }
+
+    /* Подвески */
+    .truck {
+      bottom: 12px;
+      width: 24px;
+      height: 10px;
+      background: linear-gradient(#cfd8dc, #78909c);
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+    }
+    .truck.front { left: 120px; }
+    .truck.rear  { left: 34px; }
+
+    /* Колёса */
+    .wheel {
+      bottom: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, #eceff1 0 2px, #546e7a 3px 5px, transparent 6px),
+        repeating-conic-gradient(#fdd835 0 45deg, #f57f17 45deg 90deg);
+      border: 2px solid #212121;
+      animation: spin 0.4s linear infinite;
+    }
+    .wheel.front { left: 122px; }
+    .wheel.rear  { left: 36px; }
+
+    @keyframes drive {
+      0% {
+        left: -180px;
+      }
+      100% {
+        left: calc(100vw - 230px);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="skate">
+    <div class="shadow"></div>
+    <div class="truck rear"></div>
+    <div class="truck front"></div>
+    <div class="deck"></div>
+    <div class="wheel rear"></div>
+    <div class="wheel front"></div>
+  </div>
+
+</body>
+</html>
